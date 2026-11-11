@@ -320,6 +320,7 @@ main > .section.band {
 main > .section.band.band-green { --band-bg: #046138; }
 main > .section.band.band-purple { --band-bg: #533573; }
 main > .section.band.band-blue { --band-bg: var(--color-royal, #0000c1); }
+main > .section.band.band-gold { --band-bg: var(--color-gold); }
 
 main > .section.band :is(h1, h2, h3, p, li, a:any-link) {
   color: var(--color-light);
@@ -332,6 +333,17 @@ main > .section.band .block :is(h2, h3, h4, p, li) {
 
 main > .section.band .cards.stats .cards-card-body :is(h2, h3) {
   color: #5fdc8f;
+}
+
+/* a light band (gold) keeps dark text and a dark button */
+main > .section.band.band-gold :is(h1, h2, h3, p, li, a:any-link:not(.button)) {
+  color: var(--color-ink);
+}
+
+main > .section.band.band-gold a.button:any-link {
+  border-color: var(--color-ink);
+  background: var(--color-ink);
+  color: var(--color-light);
 }
 
 main > .section.band .icon img {

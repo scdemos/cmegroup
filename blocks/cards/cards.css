@@ -1187,3 +1187,59 @@ main > .section:has(.hero.banner) .cards-wrapper:has(.cards.tiles) {
 .cards.promo.cover > ul > li:nth-child(2n) .cards-card-body > p:last-child > a::after {
   background: #00e473;
 }
+
+/* Topics: a topic link heading above the image, lead story, then a short list of related stories */
+.cards.topics > ul > li {
+  border-radius: 0;
+  border-top: 4px solid var(--color-ink);
+}
+
+.cards.topics > ul > li:hover {
+  transform: none;
+}
+
+.cards.topics .cards-card-body {
+  display: contents;
+  text-align: start;
+}
+
+.cards.topics .cards-card-body > * {
+  margin: 0;
+  padding: 0 var(--space-m);
+}
+
+.cards.topics .cards-card-body > h3 {
+  order: -1;
+  padding-block: var(--space-s);
+  font-size: var(--heading-font-size-xs);
+}
+
+.cards.topics .cards-card-body > p:has(em) {
+  padding-top: var(--space-s);
+  font-size: var(--body-font-size-xs);
+}
+
+.cards.topics .cards-card-body > h4 {
+  padding-block: var(--space-xs);
+  font-size: var(--heading-font-size-xs);
+}
+
+.cards.topics .cards-card-body > ul {
+  list-style: none;
+  margin-top: var(--space-s);
+  padding: 0;
+}
+
+.cards.topics .cards-card-body > ul > li {
+  padding: var(--space-s) var(--space-m);
+  border-top: 1px solid var(--color-gray-200);
+  font-size: var(--body-font-size-xs);
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+@media (width >= 900px) {
+  .cards.topics > ul {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
