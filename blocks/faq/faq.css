@@ -86,3 +86,17 @@ main .faq .faq-empty {
     font-size: var(--heading-font-size-m);
   }
 }
+
+/* on dark sections, questions and answers take the section's light text */
+main > .section.ink .faq :is(.faq-question, .faq-answer, .faq-answer p, .faq-answer li) {
+  color: var(--color-parchment);
+  font-family: var(--body-font-family);
+}
+
+main > .section.ink .faq .faq-item {
+  border-bottom-color: rgb(255 255 255 / 20%);
+}
+
+main > .section.ink .faq .faq-question::after {
+  color: var(--color-cyan, var(--color-gold));
+}

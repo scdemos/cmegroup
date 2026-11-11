@@ -31,7 +31,8 @@ function buildFaqItem(faq) {
     role: 'region',
     hidden: true,
   });
-  panel.append(createTag('p', {}, faq.answer));
+  if (faq.answerNodes) panel.append(...faq.answerNodes);
+  else panel.append(createTag('p', {}, faq.answer));
 
   button.addEventListener('click', () => toggleItem(button));
 
@@ -46,7 +47,45 @@ function buildCategoryGroup(category, faqs) {
   return group;
 }
 
+function addSchema(faqs) {
+  extendSchema('WebPage', {
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.answer,
+      },
+    })),
+  });
+}
+
+/**
+ * Authored mode: each row is a question cell and an answer cell.
+ * @param {Element[]} rows
+ */
+function decorateAuthored(block, rows) {
+  const faqs = rows.map((row) => {
+    const [q, a] = row.children;
+    return {
+      question: q.textContent.trim(),
+      answer: a.textContent.trim(),
+      answerNodes: [...a.childNodes],
+    };
+  }).filter((faq) => faq.question);
+  block.textContent = '';
+  faqs.forEach((faq) => block.append(buildFaqItem(faq)));
+  addSchema(faqs);
+}
+
 export default async function decorate(block) {
+  const rows = [...block.children];
+  if (rows.length && rows.every((row) => row.children.length >= 2)) {
+    decorateAuthored(block, rows);
+    return;
+  }
+
   const categories = [...block.children].map(
     (row) => row.textContent.trim(),
   ).filter(Boolean);
@@ -78,15 +117,5 @@ export default async function decorate(block) {
     block.append(buildCategoryGroup(category, grouped[category]));
   });
 
-  extendSchema('WebPage', {
-    '@type': 'FAQPage',
-    mainEntity: filtered.map((faq) => ({
-      '@type': 'Question',
-      name: faq.question,
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: faq.answer,
-      },
-    })),
-  });
+  addSchema(filtered);
 }
