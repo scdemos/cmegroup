@@ -1,4 +1,7 @@
+/* stylelint-disable no-descending-specificity -- footer layouts intentionally cascade over the default footer */
+
 footer {
+  box-sizing: border-box;
   width: 100%;
   background-color: light-dark(var(--color-rust), #080d0d);
   color: var(--color-parchment);
@@ -19,14 +22,14 @@ footer .footer p {
 }
 
 /* Row 1: Disclaimer */
-footer .footer:not(.footer-legal) .section:first-child {
+footer .footer:where(:not(.footer-layout-columns)) .section:first-child {
   padding-bottom: var(--space-m);
   font-size: var(--body-font-size-s);
   font-weight: 400;
 }
 
 /* Row 2: Tagline */
-footer .footer:not(.footer-legal) .section:nth-child(2) p {
+footer .footer:where(:not(.footer-layout-columns)) .section:nth-child(2) p {
   font-family: var(--font-family-serif);
   font-weight: 400;
   font-size: var(--body-font-size-s);
@@ -35,13 +38,13 @@ footer .footer:not(.footer-legal) .section:nth-child(2) p {
 }
 
 /* Row 3: Copyright + social icons (merged) */
-footer .footer:not(.footer-legal) .section:nth-child(3) {
+footer .footer:where(:not(.footer-layout-columns)) .section:nth-child(3) {
   margin-top: var(--space-m);
   border-top: 1px solid rgb(255 255 255 / 15%);
   padding-top: var(--space-m);
 }
 
-footer .footer:not(.footer-legal) .section:nth-child(3) .default-content-wrapper {
+footer .footer:where(:not(.footer-layout-columns)) .section:nth-child(3) .default-content-wrapper {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -54,7 +57,7 @@ footer .footer .footer-separator {
   margin-inline: var(--space-xs);
 }
 
-footer .footer:not(.footer-legal) .section:nth-child(3) ul {
+footer .footer:where(:not(.footer-layout-columns)) .section:nth-child(3) ul {
   margin: 0;
   padding: 0;
   list-style: none;
@@ -63,7 +66,7 @@ footer .footer:not(.footer-legal) .section:nth-child(3) ul {
   gap: var(--space-s);
 }
 
-footer .footer:not(.footer-legal) .section:nth-child(3) li {
+footer .footer:where(:not(.footer-layout-columns)) .section:nth-child(3) li {
   margin: 0;
 }
 
@@ -78,14 +81,14 @@ footer .footer a:any-link:hover {
   color: var(--color-gold);
 }
 
-footer .footer:not(.footer-legal) .section:nth-child(3) ul a {
+footer .footer:where(:not(.footer-layout-columns)) .section:nth-child(3) ul a {
   text-decoration: none;
   color: inherit;
   opacity: 0.7;
   transition: opacity 0.25s, transform 0.25s;
 }
 
-footer .footer:not(.footer-legal) .section:nth-child(3) ul a:hover {
+footer .footer:where(:not(.footer-layout-columns)) .section:nth-child(3) ul a:hover {
   opacity: 1;
   transform: scale(1.1);
 }
@@ -112,6 +115,7 @@ footer .footer .icon.icon-logo :is(svg, img) {
   width: auto;
   height: 100%;
   object-fit: contain;
+  filter: var(--footer-logo-filter, none);
 }
 
 @media (width >= 600px) {
@@ -120,41 +124,40 @@ footer .footer .icon.icon-logo :is(svg, img) {
   }
 }
 
-/* footer-layout: legal (link groups, social row, legal band)
-   the base rules above are scoped with :not(.footer-legal), so the order warnings below are moot */
-/* stylelint-disable no-descending-specificity */
-footer:has(.footer-legal) {
+/* Layout: columns (metadata `footer-layout: columns`): link groups, social row, legal band
+   the default rules above skip this layout via :where(:not(.footer-layout-columns)) */
+footer:has(.footer-layout-columns) {
   background-color: var(--color-light);
   color: var(--color-ink);
   border-top: 1px solid var(--color-band-light);
 }
 
-footer .footer.footer-legal > div {
+footer .footer.footer-layout-columns > div {
   max-width: none;
   padding: 0;
   text-align: start;
 }
 
-footer .footer-legal .section {
+footer .footer-layout-columns .section {
   margin: 0;
   padding: 0;
   border: 0;
 }
 
-footer .footer-legal .section > div {
+footer .footer-layout-columns .section > div {
   max-width: 1264px;
   margin: 0 auto;
   padding: 0 var(--content-padding-inline);
 }
 
-footer .footer-legal .footer-links .default-content-wrapper {
+footer .footer-layout-columns .footer-links .default-content-wrapper {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: var(--space-xl) var(--space-l);
   padding-block: var(--space-2xl) var(--space-xl);
 }
 
-footer .footer-legal .footer-group h2 {
+footer .footer-layout-columns .footer-group h2 {
   margin: 0 0 var(--space-m);
   font-size: 11px;
   font-weight: 400;
@@ -163,29 +166,29 @@ footer .footer-legal .footer-group h2 {
   color: var(--color-muted);
 }
 
-footer .footer-legal ul {
+footer .footer-layout-columns ul {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-footer .footer-legal .footer-group li {
+footer .footer-layout-columns .footer-group li {
   margin: 0 0 var(--space-s);
   font-size: 16px;
   line-height: 1.5;
 }
 
-footer .footer-legal a:any-link {
+footer .footer-layout-columns a:any-link {
   color: var(--color-ink);
   text-decoration: none;
 }
 
-footer .footer-legal a:any-link:hover {
+footer .footer-layout-columns a:any-link:hover {
   color: var(--color-link-blue);
   text-decoration: underline;
 }
 
-footer .footer-legal .footer-social .default-content-wrapper {
+footer .footer-layout-columns .footer-social .default-content-wrapper {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -193,12 +196,12 @@ footer .footer-legal .footer-social .default-content-wrapper {
   padding-block: var(--space-l) var(--space-2xl);
 }
 
-footer .footer-legal .footer-social ul {
+footer .footer-layout-columns .footer-social ul {
   display: flex;
   gap: 10px;
 }
 
-footer .footer-legal .footer-social li a {
+footer .footer-layout-columns .footer-social li a {
   display: grid;
   place-items: center;
   width: 32px;
@@ -207,22 +210,22 @@ footer .footer-legal .footer-social li a {
   border-radius: 50%;
 }
 
-footer .footer-legal .footer-social .icon {
+footer .footer-layout-columns .footer-social .icon {
   width: 16px;
   height: 16px;
   filter: none;
 }
 
-footer .footer-legal .footer-social p {
+footer .footer-layout-columns .footer-social p {
   font-size: 14px;
   font-weight: 600;
 }
 
-footer .footer-legal .footer-band {
+footer .footer-layout-columns .footer-band {
   background-color: var(--color-band-light);
 }
 
-footer .footer-legal .footer-band .default-content-wrapper {
+footer .footer-layout-columns .footer-band .default-content-wrapper {
   display: grid;
   gap: var(--space-m);
   padding-block: var(--space-xl);
@@ -231,37 +234,147 @@ footer .footer-legal .footer-band .default-content-wrapper {
   color: var(--color-ink);
 }
 
-footer .footer-legal .footer-band a:any-link {
+footer .footer-layout-columns .footer-band a:any-link {
   color: var(--color-link-blue);
 }
 
-footer .footer-legal .footer-band ul {
+footer .footer-layout-columns .footer-band ul {
   display: flex;
   flex-wrap: wrap;
   gap: 4px 0;
 }
 
-footer .footer-legal .footer-band li + li::before {
+footer .footer-layout-columns .footer-band li + li::before {
   content: '|';
   padding-inline: 8px;
   color: var(--color-muted);
 }
 
 @media (width >= 900px) {
-  footer .footer-legal .footer-links .default-content-wrapper {
+  footer .footer-layout-columns .footer-links .default-content-wrapper {
     grid-template-columns: repeat(4, 1fr);
   }
 
-  footer .footer-legal .footer-band .default-content-wrapper {
+  footer .footer-layout-columns .footer-band .default-content-wrapper {
     grid-template-columns: 220px 1fr;
   }
 
-  footer .footer-legal .footer-band .default-content-wrapper > p:first-child {
+  footer .footer-layout-columns .footer-band .default-content-wrapper > p:first-child {
     grid-column: 1 / -1;
   }
 
-  footer .footer-legal .footer-band ul {
+  footer .footer-layout-columns .footer-band ul {
     justify-content: flex-end;
   }
 }
-/* stylelint-enable no-descending-specificity */
+
+/* ==========================================================================
+   Layout: legal (metadata `footer-layout: legal`)
+   Section 1: logo + link list (row). Section 2: copyright + legal copy.
+   Section 3: legal link list (stacked).
+   ========================================================================== */
+footer .footer.footer-layout-legal {
+  background-color: var(--color-ink);
+  color: var(--color-light);
+  font-size: var(--body-font-size-xs);
+}
+
+footer .footer.footer-layout-legal > div {
+  max-width: none;
+  padding: var(--space-xl) var(--space-xl) var(--space-2xl);
+  text-align: left;
+}
+
+footer .footer.footer-layout-legal a:any-link {
+  color: var(--color-light);
+  text-decoration: underline;
+}
+
+footer .footer.footer-layout-legal a:any-link:hover {
+  color: var(--color-rust-bright);
+}
+
+footer .footer.footer-layout-legal .section {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: inherit;
+}
+
+footer .footer.footer-layout-legal .section:first-child .default-content-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-l);
+  padding-bottom: var(--space-xl);
+  border-bottom: 1px solid rgb(255 255 255 / 20%);
+}
+
+footer .footer.footer-layout-legal .section:first-child .icon {
+  width: 216px;
+  height: 40px;
+}
+
+footer .footer.footer-layout-legal .section:first-child .icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: left center;
+}
+
+footer .footer.footer-layout-legal .section ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+footer .footer.footer-layout-legal .section:first-child ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2xl);
+}
+
+footer .footer.footer-layout-legal .section:first-child ul a:any-link {
+  font-size: var(--body-font-size-s);
+}
+
+footer .footer.footer-layout-legal .section:nth-child(2) p {
+  margin: var(--space-xl) 0 0;
+  font-family: inherit;
+  font-size: var(--body-font-size-xs);
+  line-height: 1.6;
+  opacity: 1;
+}
+
+footer .footer.footer-layout-legal .section:nth-child(3) {
+  margin-top: var(--space-xl);
+}
+
+footer .footer.footer-layout-legal .section:nth-child(3) .default-content-wrapper,
+footer .footer.footer-layout-legal .section:nth-child(3) ul {
+  display: block;
+}
+
+footer .footer.footer-layout-legal .section:nth-child(3) li {
+  margin: 0 0 var(--space-s);
+}
+
+footer .footer.footer-layout-legal .section:nth-child(3) ul a:any-link {
+  font-size: var(--body-font-size-s);
+  font-weight: 700;
+  text-decoration: underline;
+  opacity: 1;
+}
+
+footer .footer.footer-layout-legal .section:nth-child(3) ul a:hover {
+  transform: none;
+}
+
+footer .footer.footer-layout-legal a.button:any-link {
+  display: inline-block;
+  padding: 0;
+  border: 0;
+  background: none;
+  box-shadow: none;
+}

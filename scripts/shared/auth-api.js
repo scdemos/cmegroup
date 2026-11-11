@@ -1,5 +1,3 @@
-import { getMetadata } from '../aem.js';
-
 const AUTH_ORIGIN = 'https://demo.bbird.live';
 const AUTH_PATHS = {
   login: '/auth/login',
@@ -17,7 +15,7 @@ function authUrl(path) {
 }
 
 export function getDefaultAuthLabel(type) {
-  return getMetadata(`${type}-label`) || AUTH_LABELS[type] || '';
+  return AUTH_LABELS[type] || '';
 }
 
 export function getLoginUrl(returnTo = window.location.href) {

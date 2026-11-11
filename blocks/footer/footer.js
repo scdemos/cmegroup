@@ -2,13 +2,12 @@ import { getMetadata } from '../../scripts/aem.js';
 import { loadFragment } from '../fragment/fragment.js';
 
 /**
- * footer-layout: legal
+ * footer-layout: columns
  * Section 1: link groups (heading + list), section 2: social icons + language,
  * section 3: legal band (disclaimer, copyright, legal links).
  * @param {Element} block
  */
-function decorateLegal(block) {
-  block.classList.add('footer-legal');
+function decorateColumns(block) {
   const [links, social, legal] = block.querySelectorAll('.section');
   links?.classList.add('footer-links');
   social?.classList.add('footer-social');
@@ -52,14 +51,17 @@ export default async function decorate(block) {
     block.append(footer);
   }
 
-  if (getMetadata('footer-layout') === 'legal') {
-    decorateLegal(block);
+  // Optional layout from site/page metadata, e.g. `footer-layout: legal`
+  const layout = getMetadata('footer-layout').toLowerCase();
+  if (layout) block.classList.add(`footer-layout-${layout}`);
+  if (layout === 'columns') {
+    decorateColumns(block);
     return;
   }
 
-  // merge social icons into copyright row
+  // merge social icons into copyright row (default layout only)
   const sections = block.querySelectorAll('.section');
-  if (sections.length >= 4) {
+  if (!layout && sections.length >= 4) {
     const copyrightSection = sections[2];
     const socialSection = sections[3];
     const socialUl = socialSection.querySelector('ul');

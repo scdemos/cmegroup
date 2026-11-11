@@ -51,6 +51,13 @@
   --color-band-light: #ebedee;
   --color-header-overlay: rgb(58 70 79 / 80%);
 
+  /*
+   * BRAND TOKENS:start
+   * Blocks reference these 8 palette tokens directly. To re-theme for a customer,
+   * re-assign the values only; never rename them. Also update the fonts, radius,
+   * --border-heritage and --shadow-glow-* rgb values further down in this :root.
+   */
+
   /* heritage palette */
   --color-rust: #006eb6;
   --color-gold: #e3e935;
@@ -62,6 +69,8 @@
   --color-card-dark: #1f3655;
   --color-rust-bright: #3cc8ff;
   --color-muted: #5a6874;
+
+  /* BRAND TOKENS:end */
 
   /* color tokens – grays and palette */
   --color-gray-100: #f1f1f1;
@@ -152,7 +161,7 @@
   /* nav / layout */
   --nav-height: 64px;
   --nav-text-transform: uppercase;
-  --nav-letter-spacing: 2px;
+  --nav-letter-spacing: 2.1px;
   --border-radius-card: 0;
   --h2-accent-display: none;
   --header-height: var(--nav-height);
