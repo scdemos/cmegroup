@@ -86,7 +86,7 @@ main > .section.ink blockquote {
   font-size: var(--heading-font-size-m);
 }
 
-main > .section.ink blockquote p {
+:is(main, article.article-body) > .section.ink blockquote p {
   color: var(--color-gold);
 }
 
