@@ -1065,7 +1065,8 @@
     gap: 20px;
   }
 
-  /* four tiles read as a 2 x 2 grid */
+  /* two or four tiles read as halves (2 x 2 for four) */
+  .cards.tiles > ul:has(> li:nth-child(2):last-child),
   .cards.tiles > ul:has(> li:nth-child(4):last-child) {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -1266,10 +1267,27 @@ main > .section:has(.hero.banner) .cards-wrapper:has(.cards.tiles) {
   .cards.articles > ul {
     grid-template-columns: repeat(3, 1fr);
   }
+
+  .cards.articles > ul:has(> li:nth-child(4):last-child) {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 
 .cards:is(.topics, .articles) .cards-card-image img {
   width: 100%;
   aspect-ratio: 16 / 9;
   object-fit: cover;
+}
+
+/* a bold-only first paragraph in a tile reads as an eyebrow */
+.cards.tiles .cards-card-body > p:first-child:has(> strong:only-child) {
+  margin: 0 0 var(--space-xs);
+  color: var(--color-gold);
+  font-size: var(--body-font-size-xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.cards.tiles.outline .cards-card-body > p:first-child:has(> strong:only-child) {
+  color: var(--link-color);
 }
