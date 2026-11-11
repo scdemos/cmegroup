@@ -256,3 +256,93 @@ main .section .tabs {
     font-size: var(--heading-font-size-m);
   }
 }
+
+/* Tabs Layout: band (section metadata on the first tab section)
+   a dark tab strip overlapping the bottom of the section above; full-width panels */
+main .section.tabs.tabs-band {
+  position: relative;
+  z-index: 2;
+  margin-top: -50px;
+  padding-block: 0;
+}
+
+.tabs.tabs-band .tabs-wrapper {
+  max-width: none;
+  padding: 0;
+}
+
+.tabs.tabs-band .tabs-list {
+  max-width: none;
+  margin: 0;
+  padding: 0 var(--content-padding-inline);
+  border: 0;
+  background-color: rgb(0 0 0 / 70%);
+}
+
+.tabs.tabs-band .tabs-list button {
+  padding: 14px 20px 13px;
+  border-top: 4px solid transparent;
+  border-bottom: 0;
+  color: #fff;
+  -webkit-text-fill-color: #fff;
+  font-size: 14px;
+  letter-spacing: 2.4px;
+  opacity: 1;
+}
+
+.tabs.tabs-band .tabs-list button.is-active,
+.tabs.tabs-band .tabs-list button[aria-selected='true'],
+.tabs.tabs-band .tabs-list button:hover {
+  border-top-color: var(--color-cyan, var(--color-gold));
+  color: var(--color-cyan, var(--color-gold));
+  -webkit-text-fill-color: var(--color-cyan, var(--color-gold));
+}
+
+.tabs.tabs-band .tabs-content {
+  margin: 0;
+  padding: 0;
+}
+
+.tabs.tabs-band .tab .section {
+  padding: 0;
+}
+
+.tabs.tabs-band .tab .section > :is(.default-content-wrapper, .block-content, .columns-wrapper) {
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+
+.tabs.tabs-band .columns > div > div {
+  max-width: none;
+}
+
+@media (width >= 900px) {
+  main .section.tabs.tabs-band {
+    padding-block: 0;
+  }
+
+  .tabs.tabs-band .tabs-list {
+    box-sizing: border-box;
+    justify-content: flex-start;
+    gap: 30px;
+    width: calc(100% - 120px);
+    margin: 0;
+    padding: 0 0 0 max(var(--space-xl), (100vw - 1264px) / 2);
+  }
+
+  .tabs.tabs-band .tabs-list button {
+    padding: 14px 6px 13px;
+  }
+
+  .tabs.tabs-band .columns > div {
+    flex-direction: row;
+    align-items: stretch;
+    gap: 0;
+  }
+
+  .tabs.tabs-band .columns > div > div {
+    width: auto;
+    max-width: none;
+  }
+}

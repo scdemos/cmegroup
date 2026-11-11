@@ -140,6 +140,9 @@ function buildTabsFromSections(tabSections) {
 
   const tabsContainer = document.createElement('div');
   tabsContainer.className = 'section tabs';
+  // optional layout from the first tab section's metadata, e.g. `Tabs Layout: band`
+  const layout = toClassName(first.dataset.tabsLayout || '');
+  if (layout) tabsContainer.classList.add(`tabs-${layout}`);
   parent.insertBefore(tabsContainer, first);
 
   const tabsUI = buildTabsUI(tabDefs, tabsContainer, first.id || '');

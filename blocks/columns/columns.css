@@ -41,3 +41,162 @@
     order: unset;
   }
 }
+
+/* columns feature: text column + dark panel column (picture or stats list) */
+.columns.feature > div {
+  gap: 0;
+  align-items: stretch;
+}
+
+.columns.feature > div > div {
+  box-sizing: border-box;
+  padding: var(--space-xl) var(--content-padding-inline);
+}
+
+.columns.feature > div > div img {
+  border-radius: 0;
+}
+
+.columns.feature .columns-panel {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  background-color: var(--color-ink);
+  color: #fff;
+}
+
+.columns.feature .columns-card {
+  --eyebrow-color: var(--color-gold);
+
+  position: relative;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: var(--space-s);
+  padding: var(--space-xl);
+  overflow: hidden;
+}
+
+.columns.feature .columns-card + .columns-card:not(.columns-card-media) {
+  background-color: var(--color-rust);
+}
+
+.columns.feature .columns-card > * {
+  position: relative;
+  margin: 0;
+}
+
+.columns.feature .columns-card :is(h2, h3, h4, a:any-link) {
+  color: inherit;
+}
+
+.columns.feature.block .columns-card :is(h2, h3) {
+  font-family: var(--font-family);
+  font-weight: 300;
+  color: inherit;
+}
+
+.columns.feature.block .columns-card h2 {
+  font-size: clamp(2.5rem, 6vw, 5.5rem);
+  line-height: 1.05;
+}
+
+.columns.feature.block .columns-card h3 {
+  font-size: clamp(1.75rem, 2.4vw, 2.25rem);
+  line-height: 1.15;
+}
+
+.columns.feature .columns-card-media {
+  min-height: 300px;
+}
+
+.columns.feature .columns-card .columns-card-bg {
+  position: absolute;
+  inset: 0;
+}
+
+.columns.feature .columns-card .columns-card-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.columns.feature .columns-card-media::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(90deg, rgb(17 43 74 / 60%) 0%, rgb(17 43 74 / 0%) 70%);
+}
+
+.columns.feature .columns-card-media > :not(.columns-card-bg) {
+  z-index: 2;
+}
+
+/* whole card is the link when its heading is */
+.columns.feature .columns-card-link :is(h1, h2, h3, h4, h5, h6) a::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+}
+
+/* stats rows: label + bold value */
+.columns.feature .columns-panel ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.columns.feature .columns-stat {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-m);
+  padding: var(--space-s) 0;
+  border-bottom: 1px dashed rgb(255 255 255 / 60%);
+}
+
+.columns.feature .columns-stat a:any-link {
+  color: var(--color-cyan, var(--color-gold));
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-size: var(--body-font-size-s);
+}
+
+.columns.feature .columns-stat strong {
+  font-size: 1.375rem;
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+.columns.feature .columns-panel p:last-child em {
+  font-size: var(--body-font-size-xs);
+}
+
+@media (width >= 900px) {
+  .columns.feature.block > div > div {
+    flex: 1 1 0;
+    padding: var(--space-2xl) 72px;
+  }
+
+  .columns.feature.block > div > .columns-panel {
+    flex: 0 0 42%;
+    padding: 0;
+  }
+
+  .columns.feature.block > div > .columns-panel:first-child {
+    flex-basis: 60%;
+  }
+
+  .columns.feature .columns-card {
+    padding: var(--space-xl) var(--space-xl) var(--space-xl) 70px;
+  }
+
+  .columns.feature .columns-panel:first-child .columns-card {
+    justify-content: center;
+    padding-inline: 88px;
+  }
+}

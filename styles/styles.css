@@ -690,6 +690,8 @@ main > .section.rust a:any-link {
 
 /* section-metadata style=ink: deep dark full-bleed section */
 :is(main, article.article-body) > .section.ink {
+  --eyebrow-color: var(--color-gold);
+
   background-color: var(--color-ink);
   color: var(--color-parchment);
   margin: 0;
@@ -733,3 +735,36 @@ main > .section.warm {
 .library-metadata-wrapper {
   display: none;
 }
+
+/* eyebrow: a paragraph that is only bold text, directly before a heading */
+main p:has(> strong:only-child):has(+ :is(h1, h2, h3)) {
+  margin-bottom: var(--space-s);
+  font-size: var(--body-font-size-s);
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--eyebrow-color, var(--color-ink));
+}
+
+main .section p:has(> strong:only-child):has(+ :is(h1, h2, h3)) > strong:only-child {
+  color: var(--eyebrow-color, inherit);
+}
+
+/* a section followed by a band tab strip ends flush, so the strip overlaps it */
+main > .section:has(+ .section.tabs-band) {
+  padding-bottom: 0;
+}
+
+/* a heading whose only content is a link: heading color with a trailing chevron */
+/* stylelint-disable no-descending-specificity -- scoped to link-only headings */
+main :is(h3, h4):has(> a:only-child) > a:any-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+main :is(h3, h4):has(> a:only-child) > a:any-link::after {
+  content: '›';
+  margin-inline-start: 0.3em;
+  color: var(--color-cyan, currentcolor);
+}
+/* stylelint-enable no-descending-specificity */

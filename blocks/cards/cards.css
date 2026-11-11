@@ -783,3 +783,113 @@
 .cards.logos .cards-card-image {
   background: transparent;
 }
+
+/* cards rail: one horizontally scrolling row of white cards; a card with an image
+   shows it as its background (featured) */
+.cards.rail > ul {
+  display: flex;
+  gap: var(--space-m);
+  margin: 0;
+  padding: 0 0 var(--space-m);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  list-style: none;
+}
+
+.cards.rail > ul > li {
+  flex: 0 0 min(300px, 80vw);
+  scroll-snap-align: start;
+  border: 0;
+  border-radius: 0;
+  background-color: #fff;
+  box-shadow: 0 1px 4px rgb(0 0 0 / 15%);
+}
+
+.cards.rail > ul > li > article {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.cards.rail .cards-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-s);
+  flex: 1;
+  padding: var(--space-m) 20px;
+  color: var(--color-body, var(--text-color));
+}
+
+.cards.rail .cards-card-body > * {
+  margin: 0;
+}
+
+.cards.rail .cards-card-body :is(h3, h4) {
+  font-size: 1.125rem;
+  line-height: 1.4;
+  letter-spacing: 0.5px;
+  color: var(--color-ink);
+}
+
+.cards.rail .cards-card-body :is(h3, h4) a:any-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.cards.rail .cards-card-body :is(h3, h4) a::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+
+.cards.rail .cards-card-body p:has(em:only-child) {
+  font-size: 11px;
+  color: var(--color-ink);
+}
+
+/* date + byline sit at the bottom */
+.cards.rail .cards-card-body p:nth-last-child(2):not(:has(em)) {
+  margin-top: auto;
+}
+
+.cards.rail .cards-card-body p:nth-last-child(-n + 2) {
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+.cards.rail > ul > li:has(.cards-card-image) {
+  flex-basis: min(376px, 85vw);
+  min-height: 380px;
+}
+
+.cards.rail .cards-card-image {
+  position: absolute;
+  inset: 0;
+}
+
+.cards.rail .cards-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0;
+}
+
+.cards.rail li:has(.cards-card-image) .cards-card-body {
+  position: relative;
+  width: 75%;
+  background-color: rgb(17 43 74 / 75%);
+  color: #fff;
+}
+
+.cards.rail li:has(.cards-card-image) .cards-card-body :is(h3, h4, p) {
+  color: #fff;
+}
+
+.cards.rail li:has(.cards-card-image) .cards-card-body :is(h3, h4) {
+  font-size: 1.5rem;
+}
+
+.cards.rail .cards-card-body > :is(h3, h4) + p:last-child {
+  margin-top: auto;
+}
