@@ -1,0 +1,64 @@
+{
+ "total": 4,
+ "limit": 4,
+ "offset": 0,
+ "data": [
+  {
+   "url": "**/**",
+   "robots": "",
+   "keywords": "",
+   "footer-layout": "legal",
+   "nav-style": "",
+   "login-label": "Log In",
+   "logout-label": "Log Out",
+   "color-scheme": "light",
+   "social-share": "off",
+   "currency": "USD",
+   "locale": "en-US",
+   "google-site-verification": "9msl4LXpcOG1UfzbtluQAKMLpTKUjKon6LYfsOvoE8c"
+  },
+  {
+   "url": "/",
+   "robots": "",
+   "keywords": "",
+   "footer-layout": "",
+   "nav-style": "overlay",
+   "login-label": "",
+   "logout-label": "",
+   "color-scheme": "",
+   "social-share": "",
+   "currency": "",
+   "locale": "",
+   "google-site-verification": ""
+  },
+  {
+   "url": "**/drafts/**",
+   "robots": "noindex,nofollow",
+   "keywords": "noindex",
+   "footer-layout": "",
+   "nav-style": "",
+   "login-label": "",
+   "logout-label": "",
+   "color-scheme": "",
+   "social-share": "",
+   "currency": "",
+   "locale": "",
+   "google-site-verification": ""
+  },
+  {
+   "url": "**/fragments/**",
+   "robots": "noindex,nofollow",
+   "keywords": "noindex",
+   "footer-layout": "",
+   "nav-style": "",
+   "login-label": "",
+   "logout-label": "",
+   "color-scheme": "",
+   "social-share": "",
+   "currency": "",
+   "locale": "",
+   "google-site-verification": ""
+  }
+ ],
+ ":type": "sheet"
+}
