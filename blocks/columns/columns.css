@@ -322,3 +322,27 @@ main > .section.ink .columns.links.block li > a:any-link {
 .columns.links > div > div:first-child > :first-child {
   margin-top: 0;
 }
+
+/* Stat: the first column is a figure panel (bold figure + caption), the rest is text */
+.columns.stat > div > div:first-child {
+  padding: var(--space-xl);
+  background-color: var(--color-band-light, #ebedee);
+}
+
+.columns.stat > div > div:first-child > p:first-child {
+  margin: 0 0 var(--space-xs);
+  font-family: var(--font-family-mono);
+  font-size: var(--heading-font-size-xxl);
+  line-height: 1.1;
+  color: var(--color-ink);
+}
+
+.columns.stat > div > div:first-child > p:first-child strong {
+  font-weight: 500;
+}
+
+@media (width >= 900px) {
+  .columns.stat > div {
+    align-items: center;
+  }
+}
