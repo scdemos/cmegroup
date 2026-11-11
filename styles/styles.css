@@ -208,6 +208,7 @@
 @media (width >= 900px) {
   :root,
   :host {
+    --nav-height: 100px;
     --body-font-size-m: 18px;
     --body-font-size-s: 16px;
     --body-font-size-xs: 14px;

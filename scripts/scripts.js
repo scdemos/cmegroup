@@ -50,6 +50,8 @@ const THEME_STORAGE_KEY = 'demo-theme';
 
 function applyTheme(theme) {
   let t = theme ?? (() => { try { return localStorage.getItem(THEME_STORAGE_KEY); } catch (e) { return null; } })();
+  const forced = getMetadata('color-scheme');
+  if (forced === 'light' || forced === 'dark') t = forced;
   if (t !== 'light' && t !== 'dark') {
     t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
   }

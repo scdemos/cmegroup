@@ -9,8 +9,20 @@ header {
   /* typography: brand (strongest) > primary nav > dropdown headings > dropdown items */
   --nav-brand-size: 1.7rem;
   --nav-brand-weight: 700;
-  --nav-primary-size: 0.8rem;
+  --nav-primary-size: 1rem;
   --nav-primary-weight: 700;
+  --nav-primary-spacing: 2.1px;
+  --nav-primary-color: #3a464f;
+
+  /* plain links (no dropdown) after the dropdown items: weight and divider ('|' or none) */
+  --nav-plain-weight: 400;
+  --nav-split-divider: '|';
+  --nav-drop-arrow: none;
+  --nav-drop-arrow-space: 0;
+
+  /* logo box */
+  --nav-logo-width: 146px;
+  --nav-logo-height: 22px;
   --nav-heading-size: var(--body-font-size-s);
   --nav-heading-weight: 700;
   --nav-item-size: var(--body-font-size-s);
@@ -26,12 +38,20 @@ header {
   --nav-radius: var(--space-s);
 
   /* backgrounds */
-  --nav-bg: var(--background-color);
+  --nav-bg: light-dark(#fff, var(--color-obsidian));
   --nav-bg-hover: var(--header-hover-bg);
   --nav-bg-link-hover: var(--header-link-hover-bg);
   --nav-bg-dropdown: light-dark(var(--background-color), var(--color-card-dark));
   --nav-bg-dropdown-mobile: light-dark(var(--color-gray-100), var(--color-card-dark));
-  --nav-bg-mega: light-dark(var(--color-parchment), var(--color-obsidian));
+  --nav-bg-mega: var(--color-ink);
+
+  /* desktop mega panel theme (fallbacks keep the light panel) */
+  --nav-mega-bg: var(--nav-bg-mega);
+  --nav-mega-color: #fff;
+  --nav-mega-hover-color: var(--color-cyan);
+  --nav-mega-heading-color: var(--color-gold);
+  --nav-mega-heading-size: 11px;
+  --nav-mega-code-color: var(--color-cyan);
   --nav-bg-hover-item: light-dark(var(--light-color), var(--color-card-dark));
 
   /* header uses neutral hover color */
@@ -50,7 +70,7 @@ header {
 }
 
 header .nav-wrapper {
-  background-color: light-dark(#faf8f5, var(--color-obsidian));
+  background-color: var(--nav-bg);
   width: 100%;
   z-index: 1000;
   position: fixed;
@@ -210,8 +230,8 @@ header nav .nav-brand .icon.icon-logo {
   }
 
 header nav .nav-brand :is(img, svg) {
-  width: min(200px, 42vw);
-  height: 45px;
+  width: var(--nav-logo-width, min(200px, 42vw));
+  height: var(--nav-logo-height, 45px);
   object-fit: contain;
 }
 
@@ -513,12 +533,14 @@ header nav .nav-sections button.button {
   border: 0;
   border-radius: 0;
   background: transparent;
-  color: var(--text-color);
+  box-shadow: none;
+  color: var(--nav-primary-color, var(--text-color));
   padding: 0;
   min-width: 0;
+  font-size: var(--nav-primary-size);
   font-weight: var(--nav-primary-weight);
   text-transform: uppercase;
-  letter-spacing: 1.5px;
+  letter-spacing: var(--nav-primary-spacing, 1.5px);
 }
 
 header nav .nav-sections a.button:any-link:hover,
@@ -529,6 +551,10 @@ header nav .nav-sections button.button:focus-visible {
   border: 0;
   transform: none;
   box-shadow: none;
+}
+
+header nav .nav-sections .default-content-wrapper > ul > li:not(.nav-drop) > p > a.button:any-link {
+  font-weight: var(--nav-plain-weight, var(--nav-primary-weight));
 }
 
 /* CTA button in header tools */
@@ -844,7 +870,7 @@ header nav .nav-tools .nav-language-menu a:focus-visible {
   /* brand: left, no shrink */
   header .nav-brand {
     flex: 0 0 auto;
-    flex-basis: 150px;
+    flex-basis: var(--nav-logo-width, 150px);
   }
 
   /* sections: nav items flow from logo, horizontal nav with dropdowns */
@@ -933,8 +959,16 @@ header nav .nav-tools .nav-language-menu a:focus-visible {
     text-decoration-thickness: 2px;
   }
 
+  /* divider between the dropdown items and the plain links */
+  header nav .nav-sections .default-content-wrapper > ul > li.nav-drop + li:not(.nav-drop)::before {
+    content: var(--nav-split-divider, none);
+    margin-inline-end: var(--space-l);
+    color: var(--nav-primary-color, var(--text-color));
+    font-weight: 400;
+  }
+
   header nav .nav-sections .nav-drop {
-    padding-right: var(--nav-item-padding);
+    padding-right: var(--nav-drop-arrow-space, var(--nav-item-padding));
     cursor: pointer;
   }
 
@@ -946,7 +980,7 @@ header nav .nav-tools .nav-language-menu a:focus-visible {
 
   header nav .nav-sections .nav-drop::after {
     content: '';
-    display: inline-block;
+    display: var(--nav-drop-arrow, inline-block);
     position: absolute;
     top: 50%;
     right: var(--space-xs);
@@ -1059,8 +1093,10 @@ header nav .nav-tools .nav-language-menu a:focus-visible {
     top: var(--mega-top, var(--nav-height, 64px));
     padding: var(--space-xl) var(--space-xl);
     border-bottom: var(--border-heritage);
-    background-color: light-dark(#faf8f5, var(--color-obsidian));
-    color: var(--text-color);
+    background-color: var(--nav-mega-bg, var(--nav-bg));
+    color: var(--nav-mega-color, var(--text-color));
+    text-transform: none;
+    letter-spacing: normal;
     box-shadow: var(--header-drop-shadow);
     z-index: 999;
     visibility: hidden;
@@ -1134,6 +1170,27 @@ header nav .nav-tools .nav-language-menu a:focus-visible {
   header nav .nav-sections .default-content-wrapper > ul > li.nav-drop-mega > ul > .nav-mega-inner > li.nav-mega-heading > p {
     margin: 0 0 var(--space-s);
     padding: 0;
+    color: var(--nav-mega-heading-color, inherit);
+    font-size: var(--nav-mega-heading-size, inherit);
+    text-transform: uppercase;
+  }
+
+  header nav .nav-sections .default-content-wrapper > ul > li.nav-drop-mega > ul a:hover,
+  header nav .nav-sections .default-content-wrapper > ul > li.nav-drop-mega > ul a:focus-visible {
+    color: var(--nav-mega-hover-color, var(--nav-hover-color));
+  }
+
+  header nav .nav-sections .default-content-wrapper > ul > li.nav-drop-mega > ul ul {
+    text-transform: none;
+    letter-spacing: normal;
+  }
+
+  /* bold text in a mega link is a code/label (e.g. product symbol) */
+  header nav .nav-sections .default-content-wrapper > ul > li.nav-drop-mega > ul a strong {
+    display: inline-block;
+    min-width: 2.1em;
+    font-weight: inherit;
+    color: var(--nav-mega-code-color, inherit);
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li.nav-drop-mega > ul > .nav-mega-inner > li.nav-mega-heading > ul {
@@ -1156,7 +1213,7 @@ header nav .nav-tools .nav-language-menu a:focus-visible {
     display: block;
     padding: var(--nav-dropdown-item-padding);
     border-radius: var(--nav-radius);
-    color: var(--text-color);
+    color: var(--nav-mega-color, var(--text-color));
     font-size: var(--body-font-size-m);
     line-height: 1.25;
     font-weight: var(--nav-item-weight);
@@ -1169,7 +1226,7 @@ header nav .nav-tools .nav-language-menu a:focus-visible {
     display: block;
     padding: var(--space-s) var(--space-s);
     border-radius: var(--nav-radius);
-    color: var(--text-color);
+    color: var(--nav-mega-color, var(--text-color));
     font-size: var(--body-font-size-m);
     font-weight: var(--nav-item-weight);
     text-decoration: none;

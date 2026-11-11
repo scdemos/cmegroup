@@ -184,6 +184,11 @@ function setupDropdown(li) {
 function initTheme(tools) {
   const btn = tools.querySelector('.icon-toggle')?.closest('p, button, a, div');
   if (!btn) return;
+  // a fixed color-scheme (site metadata) has no toggle
+  if (['light', 'dark'].includes(getMetadata('color-scheme'))) {
+    btn.remove();
+    return;
+  }
 
   const get = () => {
     try {
