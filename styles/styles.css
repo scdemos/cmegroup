@@ -831,3 +831,8 @@ main :is(h2, h3, h4):has(> a:only-child) > a:any-link::after {
 main > .section.hero-container:has(+ .section:is(.ink, .backdrop)) {
   padding-bottom: 0;
 }
+
+/* breathing room between blocks that follow each other directly */
+main > .section > .cards-wrapper + :is(.cards-wrapper, .columns-wrapper) {
+  margin-top: var(--space-xl);
+}
