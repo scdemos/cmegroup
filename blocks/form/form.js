@@ -229,6 +229,7 @@ function buildSelect(field, controlled) {
       const optionEl = createElement('option');
       optionEl.value = option;
       optionEl.textContent = option;
+      if (field.default && option === field.default) optionEl.selected = true;
       select.append(optionEl);
     });
   }

@@ -26,7 +26,8 @@ main .form form {
   max-width: 100%;
 }
 
-.form [aria-hidden='true'] {
+.form [aria-hidden='true'],
+.form .form-field[aria-hidden='true'] {
   display: none;
 }
 
@@ -357,4 +358,101 @@ main .form.panel form {
   border-radius: 0;
   padding: 0;
   background: none;
+}
+
+/* Dark variant: copy beside the form on a dark band, navy-filled fields, small uppercase labels */
+main > .section.form-container:has(.form.dark) {
+  align-items: start;
+  max-width: none;
+  margin: 0;
+  padding: var(--space-2xl) var(--content-padding-inline);
+}
+
+.form.dark.block form,
+main .form.dark.block form {
+  grid-template-columns: 1fr;
+  gap: var(--space-m);
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  background: none;
+}
+
+.form.dark.block .form-field > label:first-child {
+  color: var(--color-light);
+  font-size: var(--body-font-size-xs);
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.form.dark.block .form-field input:not([type='checkbox'], [type='radio']),
+.form.dark.block .form-field textarea,
+.form.dark.block .form-field select {
+  border: 0;
+  border-radius: 0;
+  padding: 14px 16px;
+  background-color: var(--color-deep, #081d37);
+  color: var(--color-light);
+}
+
+.form.dark.block fieldset {
+  margin: 0;
+  border: 0;
+  padding: 0;
+}
+
+.form.dark.block fieldset > legend {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.form.dark.block .form-field.checkbox-field label {
+  align-items: flex-start;
+  line-height: 1.5;
+  color: var(--color-light);
+  font-size: var(--body-font-size-xs);
+  font-weight: 700;
+}
+
+.form.dark.block .button-wrapper {
+  justify-content: flex-start;
+}
+
+@media (width >= 900px) {
+  main > .section.form-container:has(.form.dark) {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    column-gap: var(--space-3xl);
+    padding-inline: max(var(--content-padding-inline), calc((100% - var(--grid-container-width)) / 2));
+  }
+
+  main > .section.form-container:has(.form.dark) > .default-content-wrapper {
+    grid-area: 1 / 1;
+    align-self: start;
+    margin: 0;
+  }
+
+  main > .section.form-container:has(.form.dark) > .default-content-wrapper > * {
+    max-width: none;
+  }
+
+  main > .section.form-container:has(.form.dark) > .form-wrapper {
+    grid-area: 1 / 2;
+    margin-top: 0;
+  }
+
+  .form.dark.block form,
+  main .form.dark.block form {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .form.dark.block form > :is(.textarea-field, .checkbox-field, .button-wrapper),
+  .form.dark.block form > .form-field:has(input[name='company']) {
+    grid-column: 1 / -1;
+  }
 }

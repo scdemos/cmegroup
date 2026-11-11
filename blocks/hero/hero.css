@@ -380,3 +380,17 @@ main .hero.banner.block > div:first-child picture img {
     align-items: flex-start;
   }
 }
+
+/* a lone link above the title is a back link (parent page) */
+.hero.banner .hero-text p.button-container:first-child {
+  margin: 0 0 var(--space-s);
+}
+
+.hero.banner .hero-text p.button-container:first-child > a.button:any-link {
+  color: var(--color-light);
+  font-size: var(--body-font-size-xs);
+}
+
+.hero.banner .hero-text p.button-container:first-child > a.button:any-link::before {
+  content: '← ';
+}

@@ -269,3 +269,56 @@
     border-bottom: 0;
   }
 }
+
+/* links: intro beside columns of plain link lists (featured products, quick links, resources) */
+.columns.links h6 {
+  margin: 0 0 var(--space-s);
+  font-size: var(--body-font-size-xs);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.columns.links.block ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.columns.links li {
+  margin: 0 0 10px;
+  font-size: var(--body-font-size-s);
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.columns.links.block li > a:any-link {
+  text-decoration: none;
+}
+
+main > .section.ink .columns.links li > a::before {
+  content: '→ ';
+}
+
+main > .section.ink .columns.links.block li > a:any-link {
+  color: var(--color-cyan, currentcolor);
+}
+
+@media (width >= 900px) {
+  .columns.links > div {
+    align-items: flex-start;
+  }
+
+  .columns.links > div > div:first-child {
+    flex: 1.4 1 0;
+    padding-right: var(--space-xl);
+    border-right: 1px solid currentcolor;
+  }
+
+  .columns.links > div > div:first-child + div {
+    padding-left: var(--space-l);
+  }
+}
+
+.columns.links > div > div:first-child > :first-child {
+  margin-top: 0;
+}

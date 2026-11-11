@@ -52,6 +52,10 @@
   --quotes-move: #e4002b;
 }
 
+.quotes .quotes-flat {
+  --quotes-move: #6b7a90;
+}
+
 .quotes .quotes-code {
   grid-area: code;
   justify-self: start;
@@ -100,4 +104,84 @@
   .quotes .quotes-group-wide ul {
     grid-template-columns: repeat(6, 1fr);
   }
+}
+
+/* list: intro beside a stacked list of tiles, one dark panel per group */
+.quotes.list .quotes-board {
+  grid-template-columns: 1fr;
+  gap: var(--space-l);
+}
+
+.quotes.list .quotes-group {
+  display: grid;
+  gap: var(--space-l);
+  padding: var(--space-l);
+  background-color: var(--color-deep, #081d37);
+}
+
+.quotes.list ul {
+  grid-template-columns: 1fr;
+}
+
+.quotes.list .quotes-tile {
+  grid-template-areas:
+    'code last'
+    'name volume'
+    'name change';
+  gap: 2px var(--space-s);
+  min-height: 0;
+  padding: 10px 16px;
+  background-color: rgb(255 255 255 / 10%);
+}
+
+.quotes.list .quotes-name {
+  align-self: center;
+  min-height: 0;
+}
+
+.quotes.list :is(.quotes-last, .quotes-volume, .quotes-change) {
+  text-align: end;
+}
+
+.quotes .quotes-intro > :first-child {
+  margin-top: 0;
+}
+
+.quotes .quotes-intro ul {
+  display: block;
+}
+
+.quotes .quotes-intro p {
+  font-size: var(--body-font-size-s);
+}
+
+.quotes .quotes-intro p:has(> a:only-child) {
+  margin: 8px 0;
+}
+
+.quotes .quotes-intro p > a:only-child:any-link {
+  color: var(--color-cyan, currentcolor);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.quotes .quotes-intro p > a:only-child::before {
+  content: '→ ';
+}
+
+@media (width >= 900px) {
+  .quotes.list .quotes-board {
+    grid-template-columns: 1fr;
+  }
+
+  .quotes.list .quotes-group {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-3xl);
+    padding: var(--space-xl) var(--space-xl) var(--space-xl) var(--space-l);
+  }
+}
+
+.quotes .quotes-intro :is(h2, h3, h4) {
+  margin: 0 0 var(--space-s);
+  font-size: var(--heading-font-size-s);
 }
