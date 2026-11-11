@@ -27,6 +27,21 @@ export default function decorate(block) {
  */
 function decorateFeature(block) {
   block.querySelectorAll(':scope > div > div').forEach((col) => {
+    // a plain column with several sub-headings becomes a grid of items
+    const subheads = col.querySelectorAll(':scope > h4');
+    if (subheads.length > 1 && !col.querySelector('picture')) {
+      col.classList.add('columns-grid');
+      let item;
+      [...col.children].forEach((el) => {
+        if (el.tagName === 'H4' || !item) {
+          item = document.createElement('div');
+          item.className = 'columns-item';
+          col.append(item);
+        }
+        item.append(el);
+      });
+      return;
+    }
     const stats = [...col.querySelectorAll(':scope > ul > li')].filter((li) => li.querySelector('strong'));
     if (!col.querySelector('picture') && !stats.length) return;
     col.classList.add('columns-panel');

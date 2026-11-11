@@ -49,6 +49,10 @@
   --color-link-blue: #0a6dc2;
   --color-body: #5a6874;
   --color-band-light: #ebedee;
+  --color-royal: #1f3374;
+  --color-deep: #081d37;
+  --band-padding: var(--space-xl);
+  --band-margin: 0;
   --color-header-overlay: rgb(58 70 79 / 80%);
 
   /*

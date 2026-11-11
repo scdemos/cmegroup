@@ -200,3 +200,72 @@
     padding-inline: 88px;
   }
 }
+
+/* a column with several sub-headings: grid of items, every third item spans the row */
+.columns.feature .columns-grid {
+  display: grid;
+  gap: 0 var(--space-xl);
+  padding-block: 0;
+}
+
+.columns.feature .columns-item {
+  padding: var(--space-m) 0;
+  border-bottom: 1px solid rgb(255 255 255 / 30%);
+}
+
+.columns.feature .columns-item:last-child {
+  border-bottom: 0;
+}
+
+.columns.feature .columns-item > * {
+  margin: 0 0 var(--space-s);
+}
+
+.columns.feature .columns-item h4 {
+  font-size: 1.125rem;
+}
+
+.columns.feature .columns-item p {
+  font-size: var(--body-font-size-s);
+  line-height: 1.6;
+}
+
+.columns.feature .columns-item a:any-link,
+.columns.feature .columns-item a.button:any-link {
+  padding: 0;
+  border: 0;
+  background: none;
+  box-shadow: none;
+  color: var(--color-cyan, currentcolor);
+  font-size: var(--body-font-size-s);
+  letter-spacing: normal;
+  text-transform: none;
+  text-decoration: none;
+}
+
+.columns.feature .columns-item a:any-link::before {
+  content: '→ ';
+}
+
+@media (width >= 900px) {
+  .columns.feature .columns-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .columns.feature.block > div > .columns-grid {
+    flex: 1.6 1 0;
+    padding-inline: var(--space-m) 0;
+  }
+
+  .columns.feature.block > div > div:has(+ .columns-grid) {
+    padding-inline: 0 var(--space-xl);
+  }
+
+  .columns.feature .columns-item:nth-child(3n) {
+    grid-column: 1 / -1;
+  }
+
+  .columns.feature .columns-item:nth-last-child(2):nth-child(3n + 1) {
+    border-bottom: 0;
+  }
+}

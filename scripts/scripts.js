@@ -173,8 +173,24 @@ async function inlineColorIcons(scope) {
   });
 }
 
+/**
+ * Block cells with a single paragraph arrive unwrapped (div > strong > a), which
+ * decorateButtons skips. Treat a lone bold/italic link in a cell like one in a paragraph.
+ * @param {Element} element
+ */
+function decorateCellButtons(element) {
+  element.querySelectorAll('div > :is(strong, em) > a:only-child').forEach((a) => {
+    const wrap = a.parentElement;
+    const cell = wrap.parentElement;
+    if (a.querySelector('img') || cell.childNodes.length !== 1 || wrap.childNodes.length !== 1) return;
+    a.className = wrap.tagName === 'STRONG' ? 'button primary' : 'button secondary';
+    cell.classList.add('button-container');
+  });
+}
+
 export function decorateMain(main) {
   decorateButtons(main);
+  decorateCellButtons(main);
   decorateIcons(main);
   inlineColorIcons(main);
   buildAutoBlocks(main);
@@ -315,6 +331,7 @@ function watchForTargetInjectedBlocks(main) {
     [...toDecorate].forEach((block) => {
       decorateBlock(block);
       decorateButtons(block);
+      decorateCellButtons(block);
       decorateIcons(block);
     });
     Promise.all([...toDecorate].map((block) => loadBlock(block)))

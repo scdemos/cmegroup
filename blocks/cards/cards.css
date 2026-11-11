@@ -893,3 +893,193 @@
 .cards.rail .cards-card-body > :is(h3, h4) + p:last-child {
   margin-top: auto;
 }
+
+/* cards tiles: solid navy tiles with light text; a linked heading gets an arrow at the
+   top right and makes the whole tile clickable. Modifier: blue */
+.cards.tiles > ul {
+  display: grid;
+  gap: var(--space-m);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cards.tiles > ul > li {
+  position: relative;
+  border: 0;
+  border-radius: 0;
+  background-color: var(--tiles-bg, var(--color-ink));
+  color: #fff;
+  box-shadow: none;
+}
+
+.cards.tiles.blue {
+  --tiles-bg: var(--color-royal, var(--color-rust));
+}
+
+.cards.tiles .cards-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-s);
+  padding: var(--space-l) 30px;
+}
+
+.cards.tiles .cards-card-body > * {
+  margin: 0;
+  color: #fff;
+}
+
+.cards.tiles .cards-card-body :is(h3, h4) {
+  font-size: 1.25rem;
+  line-height: 1.3;
+}
+
+.cards.tiles .cards-card-body p {
+  font-size: var(--body-font-size-s);
+  line-height: 1.6;
+}
+
+.cards.tiles .cards-card-body :is(h3, h4) a:any-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.cards.tiles .cards-card-body :is(h3, h4) a::before {
+  content: '→';
+  position: absolute;
+  top: var(--space-m);
+  right: var(--space-m);
+  color: var(--color-cyan, currentcolor);
+  font-size: 1.25rem;
+}
+
+.cards.tiles .cards-card-body :is(h3, h4) a::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+
+/* cards split: dark cards, copy on the left and an aside (labels + values + links) on
+   the right, separated by a rule. Author each card as two cells. */
+.cards.split > ul {
+  display: grid;
+  gap: var(--space-m);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cards.split > ul > li {
+  border: 0;
+  border-radius: 0;
+  background-color: var(--color-deep, var(--color-ink));
+  color: #fff;
+  box-shadow: none;
+}
+
+.cards.split > ul > li > article,
+.cards.split .cards-card-link {
+  display: grid;
+  gap: var(--space-m);
+  height: 100%;
+  padding: var(--space-l) 30px;
+}
+
+.cards.split > ul > li > article:has(> .cards-card-link) {
+  display: block;
+  padding: 0;
+}
+
+.cards.split .cards-card-body {
+  padding: 0;
+}
+
+.cards.split :is(.cards-card-body, .cards-card-body + div) > * {
+  margin: 0 0 var(--space-s);
+  color: #fff;
+  font-size: var(--body-font-size-s);
+  line-height: 1.6;
+}
+
+.cards.split .cards-card-body h3 {
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+
+.cards.split .cards-card-body h3 a:any-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.cards.split .cards-card-body + div {
+  padding-top: var(--space-m);
+  border-top: 1px solid var(--color-link-blue, currentcolor);
+}
+
+.cards.split .cards-card-body + div h4 {
+  margin: var(--space-m) 0 4px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+}
+
+.cards.split .cards-card-body + div h4:first-child {
+  margin-top: 0;
+}
+
+.cards.split .cards-card-body + div p:not(:has(a)) {
+  font-family: var(--font-family-mono, monospace);
+  font-size: 1.125rem;
+  color: var(--color-quote-up, #00e473);
+}
+
+.cards.split .cards-card-body + div a:any-link {
+  color: var(--color-cyan, currentcolor);
+  text-decoration: none;
+}
+
+.cards.split .cards-card-body em {
+  font-size: var(--body-font-size-xs);
+}
+
+@media (width >= 900px) {
+  .cards.tiles > ul {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .cards.split > ul {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .cards.split > ul > li > article,
+  .cards.split .cards-card-link {
+    grid-template-columns: 1fr 160px;
+    gap: var(--space-l);
+  }
+
+  .cards.split .cards-card-body + div {
+    padding: 0 0 0 20px;
+    border-top: 0;
+    border-left: 1px solid var(--color-link-blue, currentcolor);
+  }
+}
+
+/* tiles placed in the same section right after a hero banner overlap its bottom */
+@media (width >= 900px) {
+  main .section:has(.hero.banner) .cards-wrapper:has(.cards.tiles) {
+    position: relative;
+    z-index: 1;
+    margin-top: -220px;
+  }
+}
+
+main > .section:has(.hero.banner):has(.cards.tiles) {
+  padding-bottom: 0;
+}
+
+main > .section:has(.hero.banner) .cards-wrapper:has(.cards.tiles) {
+  margin-bottom: 0;
+}

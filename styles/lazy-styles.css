@@ -310,8 +310,8 @@ header .nav-wrapper.scrolled {
    Follow it with a section styled `overlap` to pull a card panel up into the band. */
 main > .section.band {
   position: relative;
-  margin: var(--space-2xl) 0 0;
-  padding: var(--space-3xl) 0;
+  margin: var(--band-margin, var(--space-2xl)) 0 0;
+  padding: var(--band-padding, var(--space-3xl)) 0;
   overflow: hidden;
   background: var(--band-bg, var(--color-ink));
   color: var(--color-light);
@@ -319,7 +319,7 @@ main > .section.band {
 
 main > .section.band.band-green { --band-bg: #046138; }
 main > .section.band.band-purple { --band-bg: #533573; }
-main > .section.band.band-blue { --band-bg: #0000c1; }
+main > .section.band.band-blue { --band-bg: var(--color-royal, #0000c1); }
 
 main > .section.band :is(h1, h2, h3, p, li, a:any-link) {
   color: var(--color-light);
@@ -355,7 +355,7 @@ main > .section.band > .default-content-wrapper > p:has(> picture:only-child) im
 }
 
 /* lone links inside a band render as arrow links, not filled buttons */
-main > .section.band a.button:any-link {
+main > .section.band a.button:not(.primary, .secondary):any-link {
   display: inline-flex;
   align-items: center;
   gap: var(--space-s);
@@ -367,7 +367,7 @@ main > .section.band a.button:any-link {
   font-weight: 700;
 }
 
-main > .section.band a.button:any-link::before {
+main > .section.band a.button:not(.primary, .secondary):any-link::before {
   content: '→';
   display: inline-grid;
   place-items: center;
@@ -386,7 +386,7 @@ main > .section.overlap {
 
 @media (width >= 900px) {
   main > .section.band {
-    padding: var(--space-4xl) 0;
+    padding: var(--band-padding, var(--space-4xl)) 0;
   }
 
   main > .section.band:has(+ .section.overlap) {
@@ -541,3 +541,43 @@ main > .section.tags li {
 }
 
 /* stylelint-enable no-descending-specificity */
+
+/* stylelint-disable no-descending-specificity -- each style targets a different section class */
+
+/* section-metadata style=backdrop: a lone picture paragraph at the start of the section
+   becomes its full-bleed background (dark scrim, light text) */
+main > .section.backdrop {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background-color: var(--color-ink);
+  color: #fff;
+}
+
+main > .section.backdrop > .default-content-wrapper:first-child > p:first-child:has(> picture:only-child) {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  margin: 0;
+}
+
+main > .section.backdrop > .default-content-wrapper:first-child > p:first-child:has(> picture:only-child) img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0;
+}
+
+main > .section.backdrop :is(h1, h2, h3, h4, p, li) {
+  color: #fff;
+}
+
+/* stylelint-enable no-descending-specificity */
+
+/* secondary buttons on dark sections: white outline */
+main > .section:is(.band, .ink, .backdrop) a.button.secondary:any-link {
+  border-color: #fff;
+  background: transparent;
+  color: #fff;
+  font-style: normal;
+}
