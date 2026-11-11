@@ -959,6 +959,22 @@
   inset: 0;
 }
 
+/* tiles outline: transparent tiles with a thin border; text follows the section */
+.cards.tiles.outline > ul > li {
+  border: 1px solid var(--tiles-border, #1a7fd4);
+  border-radius: 6px;
+  background-color: transparent;
+  color: inherit;
+}
+
+.cards.tiles.outline .cards-card-body > * {
+  color: inherit;
+}
+
+.cards.tiles.outline .cards-card-body :is(h3, h4) a::before {
+  color: var(--tiles-border, #1a7fd4);
+}
+
 /* cards split: dark cards, copy on the left and an aside (labels + values + links) on
    the right, separated by a rule. Author each card as two cells. */
 .cards.split > ul {
@@ -1052,6 +1068,11 @@
   /* four tiles read as a 2 x 2 grid */
   .cards.tiles > ul:has(> li:nth-child(4):last-child) {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* eight or more tiles: four across */
+  .cards.tiles > ul:has(> li:nth-child(8)) {
+    grid-template-columns: repeat(4, 1fr);
   }
 
   .cards.split > ul {
