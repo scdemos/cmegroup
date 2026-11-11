@@ -1243,3 +1243,27 @@ main > .section:has(.hero.banner) .cards-wrapper:has(.cards.tiles) {
     grid-template-columns: repeat(3, 1fr);
   }
 }
+
+/* Articles: compact 3-up article cards (image, read time, title) */
+.cards.articles > ul > li {
+  border-radius: 0;
+}
+
+.cards.articles .cards-card-body {
+  text-align: start;
+}
+
+.cards.articles .cards-card-body h4 {
+  font-size: var(--heading-font-size-xs);
+}
+
+.cards.articles .cards-card-body p:has(em) {
+  margin: 0 0 var(--space-xs);
+  font-size: var(--body-font-size-xs);
+}
+
+@media (width >= 900px) {
+  .cards.articles > ul {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
