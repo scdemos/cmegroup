@@ -1267,3 +1267,9 @@ main > .section:has(.hero.banner) .cards-wrapper:has(.cards.tiles) {
     grid-template-columns: repeat(3, 1fr);
   }
 }
+
+.cards:is(.topics, .articles) .cards-card-image img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
