@@ -332,13 +332,17 @@ main > .section.ink .columns.links.block li > a:any-link {
 .columns.stat > div > div:first-child > p:first-child {
   margin: 0 0 var(--space-xs);
   font-family: var(--font-family-mono);
-  font-size: var(--heading-font-size-xxl);
+  font-size: var(--heading-font-size-xl);
   line-height: 1.1;
   color: var(--color-ink);
 }
 
 .columns.stat > div > div:first-child > p:first-child strong {
   font-weight: 500;
+}
+
+main > .section.light .columns.stat > div > div:first-child {
+  background-color: var(--color-light, #fff);
 }
 
 @media (width >= 900px) {

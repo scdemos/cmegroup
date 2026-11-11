@@ -43,7 +43,7 @@ main .faq .faq-question::after {
   content: '+';
   font-size: var(--body-font-size-xl);
   font-weight: 300;
-  color: var(--color-accent);
+  color: var(--link-color);
   flex-shrink: 0;
   margin-left: var(--space-m);
   transition: transform 0.35s var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1));
