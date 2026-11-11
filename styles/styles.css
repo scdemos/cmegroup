@@ -826,3 +826,8 @@ main :is(h2, h3, h4):has(> a:only-child) > a:any-link::after {
 }
 /* stylelint-enable no-descending-specificity */
 
+
+/* a hero followed directly by a dark section: no white seam between them */
+main > .section.hero-container:has(+ .section:is(.ink, .backdrop)) {
+  padding-bottom: 0;
+}
