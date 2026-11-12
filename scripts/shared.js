@@ -114,7 +114,14 @@ export function normalizePath(path = '') {
  * @returns {string[]}
  */
 export function parseKeywords(raw = '') {
-  return String(raw)
+  let text = String(raw);
+  // query-index "values" columns arrive as a JSON array string, e.g. '["markets, trading"]'
+  if (text.trim().startsWith('[')) {
+    try {
+      text = JSON.parse(text).join(',');
+    } catch { /* keep as is */ }
+  }
+  return text
     .split(',')
     .map((keyword) => keyword.trim().toLowerCase())
     .filter(Boolean);
